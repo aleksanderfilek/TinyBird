@@ -1,0 +1,19 @@
+{
+    "Name" : "TinyBird.exe",
+    "Type": "Executable",
+    "OutputDir": "bin",
+    "Compiler" : "gcc",
+    "Extension" : ".c",
+    "LibsDir" : [
+        "bin"
+    ],
+    "Libs" : [
+        "-lSDL2", 
+        "-lopengl32",
+        "-lglu32",
+        "-lm"
+    ],
+    "CompilerDefines" : [
+        "DEBUG"
+    ]
+}

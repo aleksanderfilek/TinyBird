@@ -1,0 +1,3 @@
+Warning: resolving _WinMain@16 by linking to _WinMain
+Use --enable-stdcall-fixup to disable these warnings
+Use --disable-stdcall-fixup to disable these fixups

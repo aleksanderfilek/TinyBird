@@ -37,7 +37,7 @@ Shader* ShaderCreate(const char* vertexPath, const char* fragmentPath)
     uint32_t program = glCreateProgram();
 
     uint32_t vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexBuffer, NULL);
+    glShaderSource(vertexShader, 1, (const char**)&vertexBuffer, NULL);
     glCompileShader(vertexShader);
     #ifdef DEBUG   
     glShaderCheckError(vertexShader, GL_COMPILE_STATUS);
@@ -48,7 +48,7 @@ Shader* ShaderCreate(const char* vertexPath, const char* fragmentPath)
     #endif
 
     uint32_t fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentBuffer, NULL);
+    glShaderSource(fragmentShader, 1, (const char**)&fragmentBuffer, NULL);
     glCompileShader(fragmentShader);
     #ifdef DEBUG  
     glShaderCheckError(fragmentShader, GL_COMPILE_STATUS);

@@ -1,9 +1,0 @@
-source/Graphics/Shader.c: In function 'ShaderCreate':
-source/Graphics/Shader.c:40:37: warning: passing argument 3 of '__glewShaderSource' from incompatible pointer type [-Wincompatible-pointer-types]
-     glShaderSource(vertexShader, 1, &vertexBuffer, NULL);
-                                     ^
-source/Graphics/Shader.c:40:37: note: expected 'const GLchar * const* {aka const char * const*}' but argument is of type 'char **'
-source/Graphics/Shader.c:51:39: warning: passing argument 3 of '__glewShaderSource' from incompatible pointer type [-Wincompatible-pointer-types]
-     glShaderSource(fragmentShader, 1, &fragmentBuffer, NULL);
-                                       ^
-source/Graphics/Shader.c:51:39: note: expected 'const GLchar * const* {aka const char * const*}' but argument is of type 'char **'

@@ -6,12 +6,18 @@
 
 Core* core = NULL;
 
-#include<stdio.h>
+
+EventFunction(CloseApp)
+{
+    Core* _core = (Core*)args;
+    _core->quit = true;
+}
 
 int WinMain(int argc, char *argv[])
 {
     core = CoreCreate();
     Window* window = WindowCreate("title", 640, 480, 0);
+    EventAdd(window->closeEvent, CloseApp);
     Input* input = InputCreate();
     StateManager* stateManager = StateManagerCreate();
     StateManagerSetNext(stateManager, MenuState);

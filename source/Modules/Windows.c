@@ -1,7 +1,10 @@
 #include"Window.h"
+#include"Core.h"
 
 #include<stdio.h>
 #include<stdlib.h>
+
+extern Core* core;
 
 Window* WindowCreate(const char* title, int width, int height, uint32_t sdlFlag)
 {
@@ -18,7 +21,7 @@ Window* WindowCreate(const char* title, int width, int height, uint32_t sdlFlag)
     if(!window->sdlWindow)
     {
         printf("Window could not be created! SDL Error: %s\n",SDL_GetError());
-        return;
+        return NULL;
     }
 
     window->id = SDL_GetWindowID(window->sdlWindow);
@@ -27,7 +30,7 @@ Window* WindowCreate(const char* title, int width, int height, uint32_t sdlFlag)
     if(!window->renderer)
     {
         printf("Renderer could not be created! SDL Error: %s\n",SDL_GetError());
-        return;
+        return NULL;
     }
 
     window->size = (Int2){width, height};
@@ -51,6 +54,8 @@ Window* WindowCreate(const char* title, int width, int height, uint32_t sdlFlag)
 
     glClearColor(1.0f,1.0f,1.0f,1.0f);
 
+    window->closeEvent = EventCreate();
+
     #ifdef DEBUG
     printf("[Window] Created\n");
     #endif
@@ -61,6 +66,8 @@ Window* WindowCreate(const char* title, int width, int height, uint32_t sdlFlag)
 void WindowDestroy(void* ptr)
 {
     Window* window = (Window*)ptr;
+
+    EventDestroy(window->closeEvent);
 
     SDL_GL_DeleteContext(window->glContext);
     SDL_DestroyRenderer(window->renderer);
@@ -78,5 +85,21 @@ void WindowUpdate(void* ptr, double elapsedTime)
 
     while(SDL_PollEvent(&window->sdlEvent) != 0)
     {
+        switch (window->sdlEvent.type)
+        {
+        case SDL_QUIT:
+            EventInvoke(window->closeEvent, window, core, 0);
+            break;
+        }
     }
+}
+
+void WindowClear()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void WindowRender(Window* window)
+{
+    SDL_GL_SwapWindow(window->sdlWindow);
 }

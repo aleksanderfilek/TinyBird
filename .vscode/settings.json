@@ -2,6 +2,8 @@
     "files.associations": {
         "gl.h": "c",
         "shader.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "event.h": "c",
+        "core.h": "c"
     }
 }

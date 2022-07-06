@@ -4,6 +4,10 @@
         "shader.h": "c",
         "stdio.h": "c",
         "event.h": "c",
-        "core.h": "c"
+        "core.h": "c",
+        "type_traits": "c",
+        "xtr1common": "c",
+        "initializer_list": "c",
+        "mesh.h": "c"
     }
 }

@@ -12,7 +12,7 @@ typedef struct Mesh
 } Mesh;
 
 Mesh* PlaneCreate();
-void MeshDestroy(Mesh* mesh);
+void MeshDestroy(void* ptr);
 void MeshDraw(Mesh* mesh);
 
 #endif

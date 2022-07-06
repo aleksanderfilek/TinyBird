@@ -28,6 +28,7 @@ Window* WindowCreate(const char* title, int width, int height, uint32_t sdlFlag)
 void WindowUpdate(void* ptr, double elapsedTime);
 void WindowDestroy(void* ptr);
 
+void WindowColorSet(float r, float g, float b, float a);
 void WindowClear();
 void WindowRender(Window* window);
 

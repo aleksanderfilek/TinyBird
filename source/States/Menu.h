@@ -11,6 +11,7 @@ STRUCT(Window);
 STRUCT(Shader);
 STRUCT(Mesh);
 STRUCT(Texture);
+STRUCT(Spritebatch);
 
 typedef struct Menu
 {
@@ -19,6 +20,7 @@ typedef struct Menu
     Shader* shader;
     Texture* texture;
     Mesh* mesh;
+    Spritebatch* spritebatch;
 } Menu;
 
 void MenuStart(void* ptr);

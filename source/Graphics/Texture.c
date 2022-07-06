@@ -35,9 +35,11 @@ Texture* TextureCreate(const char* path)
     return texture;
 }
 
-void TextureDestroy(Texture* texture)
+void TextureDestroy(void* ptr)
 {
+    Texture* texture = (Texture*)ptr;
     glDeleteTextures(1, &texture->glId);
+    free(texture);
 }
 
 void TextureBind(Texture* texture, uint32_t textureSlotId)

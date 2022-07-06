@@ -94,6 +94,11 @@ void WindowUpdate(void* ptr, double elapsedTime)
     }
 }
 
+void WindowColorSet(float r, float g, float b, float a)
+{
+   glClearColor(r, g, b, a); 
+}
+
 void WindowClear()
 {
     glClear(GL_COLOR_BUFFER_BIT);

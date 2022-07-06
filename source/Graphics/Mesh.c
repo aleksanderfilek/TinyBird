@@ -47,11 +47,13 @@ Mesh* PlaneCreate()
     return mesh;
 }
 
-void MeshDestroy(Mesh* mesh)
+void MeshDestroy(void* ptr)
 {
+    Mesh* mesh = (Mesh*)ptr;
     glDeleteBuffers(1, &mesh->VAO);
     glDeleteBuffers(1, &mesh->VBO);
     glDeleteBuffers(1, &mesh->EBO);
+    free(mesh);
 }
 
 void MeshDraw(Mesh* mesh)

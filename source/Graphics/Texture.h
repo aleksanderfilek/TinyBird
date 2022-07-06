@@ -12,7 +12,7 @@ typedef struct Texture
 } Texture;
 
 Texture* TextureCreate(const char* path);
-void TextureDestroy(Texture* texture);
+void TextureDestroy(void* ptr);
 void TextureBind(Texture* texture, uint32_t textureSlotId);
 
 #endif

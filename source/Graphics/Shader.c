@@ -73,12 +73,19 @@ Shader* ShaderCreate(const char* vertexPath, const char* fragmentPath)
     return shader;
 }
 
-void ShaderDestroy(Shader* shader)
+void ShaderDestroy(void* ptr)
 {
+    Shader* shader = (Shader*)ptr;
     glDeleteProgram(shader->glId);
+    free(shader);
 }
 
 void ShaderBind(Shader* shader)
 {
     glUseProgram(shader->glId);
+}
+
+void ShaderUniformMatrixSet(Shader* shader, const char* name, const Mat4* value)
+{
+    glUniformMatrix4fv(glGetUniformLocation(shader->glId, name), 1, GL_FALSE, &value->column[0].x); 
 }

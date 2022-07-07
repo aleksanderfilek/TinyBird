@@ -3,6 +3,9 @@
 #include"Texture.h"
 #include"Shader.h"
 
+#ifdef DEBUG
+#include<stdio.h>
+#endif
 #include<stdlib.h>
 
 Spritebatch* SpritebatchCreate(Shader* shader, uint32_t capacity, uint32_t maxTextures)
@@ -64,6 +67,10 @@ Spritebatch* SpritebatchCreate(Shader* shader, uint32_t capacity, uint32_t maxTe
     spritebatch->sampler[i] = i;
   }
 
+  #ifdef DEBUG
+  printf("[Spritebatch] Created\n");
+  #endif
+
   return spritebatch;
 }
 
@@ -78,6 +85,11 @@ void SpritebatchDestroy(void* ptr)
 
   free(spritebatch->quadBuffer);
   free(spritebatch->sampler);
+  free(ptr);
+
+  #ifdef DEBUG
+  printf("[Spritebatch] Destroyed\n");
+  #endif
 }
 
 void SpritebatchBegin(Spritebatch* spritebatch)

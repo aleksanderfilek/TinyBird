@@ -2,6 +2,9 @@
 
 #include"../ThirdParty/GL/Gl.h"
 
+#ifdef DEBUG
+#include<stdio.h>
+#endif
 #include<stdlib.h>
 
 Mesh* PlaneCreate()
@@ -44,6 +47,10 @@ Mesh* PlaneCreate()
     mesh->EBO = EBO;
     mesh->indicesCount = indicesCount;
 
+    #ifdef DEBUG
+    printf("[Mesh] Created\n");
+    #endif
+
     return mesh;
 }
 
@@ -54,6 +61,10 @@ void MeshDestroy(void* ptr)
     glDeleteBuffers(1, &mesh->VBO);
     glDeleteBuffers(1, &mesh->EBO);
     free(mesh);
+
+    #ifdef DEBUG
+    printf("[Mesh] Destroyed\n");
+    #endif
 }
 
 void MeshDraw(Mesh* mesh)

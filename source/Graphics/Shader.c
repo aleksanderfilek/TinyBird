@@ -3,7 +3,10 @@
 #include"../ThirdParty/GL/Gl.h"
 #include"Debug.h"
 
+#ifdef DEBUG
 #include<stdio.h>
+#endif
+
 #include<stdlib.h>
 
 Shader* ShaderCreate(const char* vertexPath, const char* fragmentPath)
@@ -70,6 +73,10 @@ Shader* ShaderCreate(const char* vertexPath, const char* fragmentPath)
 
     shader->glId = program;
 
+    #ifdef DEBUG
+    printf("[Shader] Created\n");
+    #endif
+
     return shader;
 }
 
@@ -78,6 +85,10 @@ void ShaderDestroy(void* ptr)
     Shader* shader = (Shader*)ptr;
     glDeleteProgram(shader->glId);
     free(shader);
+
+    #ifdef DEBUG
+    printf("[Shader] Destroyed\n");
+    #endif
 }
 
 void ShaderBind(Shader* shader)

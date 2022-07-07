@@ -4,8 +4,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include"../ThirdParty/Stb/stb_image.h"
 
-#include<stdlib.h>
+#ifdef DEBUG
 #include<stdio.h>
+#endif
+#include<stdlib.h>
 
 Texture* TextureCreate(const char* path)
 {
@@ -32,6 +34,10 @@ Texture* TextureCreate(const char* path)
     texture->glId = gl_id;
     texture->size = (Int2){ width, height };
 
+    #ifdef DEBUG
+    printf("[Texture] Created\n");
+    #endif
+
     return texture;
 }
 
@@ -40,6 +46,10 @@ void TextureDestroy(void* ptr)
     Texture* texture = (Texture*)ptr;
     glDeleteTextures(1, &texture->glId);
     free(texture);
+
+    #ifdef DEBUG
+    printf("[Texture] Destroyed\n");
+    #endif
 }
 
 void TextureBind(Texture* texture, uint32_t textureSlotId)

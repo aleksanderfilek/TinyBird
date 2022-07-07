@@ -50,7 +50,7 @@ void StateManagerDestroy(void* ptr)
         manager->currentState.destroy(manager->currentState.data);
     }
 
-    free(manager);
+    free(ptr);
 
     #ifdef DEBUG
     printf("[State Manager] Destroyed\n");

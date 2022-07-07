@@ -45,9 +45,6 @@ void MenuUpdate(void* ptr, double elapsedTime)
     SpritebatchBegin(menu->spritebatch);
     SpritebatchDraw(menu->spritebatch, menu->texture, (Int2){10, 10}, (Int2){100, 100}, (Float4){0.0f, 0.0f, 1.0f, 1.0f});
     SpritebatchEnd(menu->spritebatch);
-    // ShaderBind(menu->simpleShader);
-    // TextureBind(menu->texture, 0);
-    // MeshDraw(menu->mesh);
 
     RenderTargetBind(NULL);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -70,4 +67,5 @@ void MenuDestroy(void* ptr)
     SpritebatchDestroy(menu->spritebatch);
 
     free(ptr);
+    printf("[Menu] Destroyed\n");
 }

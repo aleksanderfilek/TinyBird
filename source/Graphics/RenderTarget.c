@@ -3,8 +3,12 @@
 #include"../Modules/Core.h"
 #include"../Modules/Window.h"
 
-#include<stdlib.h>
+#ifdef DEBUG
 #include<stdio.h>
+#endif
+
+#include<stdlib.h>
+
 extern Core* core;
 
 RenderTarget* RenderTargetCreate(int width, int height)
@@ -31,6 +35,10 @@ RenderTarget* RenderTargetCreate(int width, int height)
   renderTarget->texture.size = (Int2){ width, height };
   renderTarget->fbo = fbo;
 
+  #ifdef DEBUG
+  printf("[RenderTarget] Created\n");
+  #endif
+
   return renderTarget;
 }
 
@@ -39,8 +47,11 @@ void RenderTargetDestroy(void* ptr)
   RenderTarget* renderTarget = (RenderTarget*)ptr;
   glDeleteTextures(1, &renderTarget->texture.glId);
   glDeleteFramebuffers(1, &renderTarget->fbo);
-
   free(ptr);
+
+  #ifdef DEBUG
+  printf("[RenderTarget] Destroyed\n");
+  #endif
 }
 
 void RenderTargetBind(RenderTarget* renderTarget)
@@ -48,12 +59,6 @@ void RenderTargetBind(RenderTarget* renderTarget)
   int id = (renderTarget)? renderTarget->fbo : 0;
   glBindFramebuffer(GL_FRAMEBUFFER, id);
 
-  if(renderTarget)
-  {
-    glViewport(0, 0, renderTarget->texture.size.x, renderTarget->texture.size.y);
-    return;
-  }
-
-  Int2 size = ((Window*)CoreModuleGet(core, 2))->size;
+  Int2 size = (renderTarget)? renderTarget->texture.size : ((Window*)CoreModuleGet(core, 2))->size;
   glViewport(0, 0, size.x, size.y);
 }

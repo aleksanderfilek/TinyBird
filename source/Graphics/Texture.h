@@ -2,6 +2,7 @@
 #define TB_TEXTURE_H_
 
 #include"../Math.h"
+#include"Color.h"
 
 #include<stdint.h>
 

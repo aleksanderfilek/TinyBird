@@ -1,17 +1,11 @@
 #version 330 core
-
 out vec4 FragColor;
+  
+in vec2 TexCoords;
 
-uniform sampler2D sb_textures[32];
-
-in VS_OUT
-{
-  vec2 TexCoords;
-  float TexIndex;
-} fs_in;
+uniform sampler2D screenTexture;
 
 void main()
-{
-  int index = int(fs_in.TexIndex);
-  FragColor = texture(sb_textures[index], fs_in.TexCoords);
+{ 
+    FragColor = texture(screenTexture, TexCoords);
 }

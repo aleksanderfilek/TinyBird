@@ -8,6 +8,8 @@
         "type_traits": "c",
         "xtr1common": "c",
         "initializer_list": "c",
-        "mesh.h": "c"
+        "mesh.h": "c",
+        "texture.h": "c",
+        "stb_image_write.h": "c"
     }
 }

@@ -3,8 +3,8 @@
 
 #include"../Defaults.h"
 #include"../Modules/State.h"
-
 #include<stdint.h>
+#include"../Math.h"
 
 STRUCT(Input);
 STRUCT(Window);
@@ -13,6 +13,7 @@ STRUCT(Mesh);
 STRUCT(Texture);
 STRUCT(Spritebatch);
 STRUCT(RenderTarget);
+STRUCT(Font);
 
 typedef struct Menu
 {
@@ -24,6 +25,9 @@ typedef struct Menu
     Spritebatch* spritebatch;
     Shader* simpleShader;
     RenderTarget* renderTarget;
+    Font* font;
+    Mat4 pixelMat;
+    Mat4 smallPixelMat;
 } Menu;
 
 void MenuStart(void* ptr);

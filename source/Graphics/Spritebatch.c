@@ -2,11 +2,13 @@
 #include"../ThirdParty/GL/Gl.h"
 #include"Texture.h"
 #include"Shader.h"
+#include"Font.h"
 
 #ifdef DEBUG
 #include<stdio.h>
 #endif
 #include<stdlib.h>
+#include<string.h>
 
 Spritebatch* SpritebatchCreate(Shader* shader, uint32_t capacity, uint32_t maxTextures)
 {
@@ -58,7 +60,7 @@ Spritebatch* SpritebatchCreate(Shader* shader, uint32_t capacity, uint32_t maxTe
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
 
   spritebatch->maxTextureSlots = maxTextures;
-  spritebatch->textureSlots = (const Texture**)calloc(maxTextures, sizeof(const Texture*));
+  spritebatch->textureSlots = (uint32_t*)calloc(maxTextures, sizeof(const uint32_t));
   spritebatch->textureSlotIndex = 0;
 
   spritebatch->sampler = (int*)calloc(maxTextures, sizeof(int));
@@ -112,14 +114,14 @@ void SpritebatchEnd(Spritebatch* spritebatch)
 
   for(int i = 0; i < spritebatch->textureSlotIndex; i++)
   {
-    glBindTextureUnit(i, spritebatch->textureSlots[i]->glId);
+    glBindTextureUnit(i, spritebatch->textureSlots[i]);
   }
 
   glBindVertexArray(spritebatch->VAO);
   glDrawElements(GL_TRIANGLES, spritebatch->indexCount, GL_UNSIGNED_INT, NULL);
 }
 
-void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, const Int2 position, const Int2 size, Float4 rect)
+void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, Int2 position, Int2 size, Float4 rect)
 {
   if(spritebatch->indexCount >= spritebatch->maxIndexCount || spritebatch->textureSlotIndex > spritebatch->maxTextureSlots)
   {
@@ -131,7 +133,7 @@ void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, const Int2 posi
   // check registred texture
   for(int i = 0; i < spritebatch->textureSlotIndex; i++)
   {
-    if(spritebatch->textureSlots[i]->glId == texture->glId)
+    if(spritebatch->textureSlots[i] == texture->glId)
     {
       textureIndex = (float)i;
       break;
@@ -142,7 +144,7 @@ void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, const Int2 posi
   if(textureIndex == -1.0f)
   {
     textureIndex = spritebatch->textureSlotIndex;
-    spritebatch->textureSlots[spritebatch->textureSlotIndex] = texture;
+    spritebatch->textureSlots[spritebatch->textureSlotIndex] = texture->glId;
     spritebatch->textureSlotIndex++;
   }
 
@@ -167,4 +169,25 @@ void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, const Int2 posi
   spritebatch->quadBufferPtr++;
 
   spritebatch->indexCount += 6;
+}
+
+void SpritebatchRenderText(Spritebatch* spritebatch, Font* font, const char* text, Int2 position, float scale)
+{
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
+
+  int length = strlen(text);
+
+  Int2 characterPosition = position;
+  for(int i = 0; i < length; i++)
+  {
+    Character* character = &font->characters[(int)text[i]];
+    int xPos = characterPosition.x + (character->Bearing.x * scale);
+    int yPos = characterPosition.y + (font->height - character->Bearing.y) * scale;
+    Int2 size = { character->Size.x * scale, character->Size.y * scale };
+    Texture texture = { .glId = character->TextureID };
+    SpritebatchDraw(spritebatch, &texture, (Int2){xPos, yPos}, size, (Float4){0.0f, 0.0f, 1.0f, 1.0f});
+    characterPosition.x += (character->Advance >> 6 ) * scale;
+  }
+  glDisable(GL_BLEND);
 }

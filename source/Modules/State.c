@@ -24,13 +24,14 @@ void StateManagerUpdate(void* ptr, double elapsedTime)
         if(manager->currentState.data)
         {
             manager->currentState.destroy(manager->currentState.data);
+            free(manager->currentState.data);
         }
 
         manager->currentState = manager->nextState;
-        manager->currentState.data = calloc(1, sizeof(manager->currentState.size));
+        manager->currentState.data = malloc(manager->currentState.size);
         manager->currentState.start(manager->currentState.data);
 
-        memset(&manager->nextState, 0, sizeof(State));
+        manager->nextState.size = 0;
     }
 
     if(manager->currentState.data == NULL)
@@ -48,6 +49,7 @@ void StateManagerDestroy(void* ptr)
     if(manager->currentState.data)
     {
         manager->currentState.destroy(manager->currentState.data);
+        free(manager->currentState.data);
     }
 
     free(ptr);

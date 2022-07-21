@@ -8,6 +8,7 @@
 
 STRUCT(Texture);
 STRUCT(Shader);
+STRUCT(Font);
 
 typedef struct SpritebatchVertex
 {
@@ -31,7 +32,7 @@ typedef struct Spritebatch
   uint32_t maxIndexCount;
 
   uint32_t maxTextureSlots;
-  const Texture** textureSlots;
+  uint32_t* textureSlots;
   uint32_t textureSlotIndex;
   uint32_t shaderTexturesLocation;
 
@@ -43,6 +44,7 @@ Spritebatch* SpritebatchCreate(Shader* shader, uint32_t capacity, uint32_t maxTe
 void SpritebatchDestroy(void* ptr);
 void SpritebatchBegin(Spritebatch* spritebatch);
 void SpritebatchEnd(Spritebatch* spritebatch);
-void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, const Int2 position, const Int2 size, Float4 rect);
+void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, Int2 position, Int2 size, Float4 rect);
+void SpritebatchRenderText(Spritebatch* spritebatch, Font* font, const char* text, Int2 position, float scale);
 
 #endif

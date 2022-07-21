@@ -78,12 +78,12 @@ bool InputMouseButtonPressed(Input* input, EKeyCode button)
 
 bool InputMouseButtonDown(Input* input, EMouse button)
 {
-    return input->currentMouseState&SDL_BUTTON(button) && !input->previousMouseState&SDL_BUTTON(button); 
+    return input->currentMouseState&SDL_BUTTON(button) && !(input->previousMouseState&SDL_BUTTON(button)); 
 }
 
 bool InputMouseButtonUp(Input* input, EMouse button)
 {
-    return !input->currentMouseState&SDL_BUTTON(button) && input->previousMouseState&SDL_BUTTON(button); 
+    return !(input->currentMouseState&SDL_BUTTON(button)) && input->previousMouseState&SDL_BUTTON(button); 
 }
 
 Int2 InputGetMousePosition(Input* input) 

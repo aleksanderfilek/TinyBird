@@ -40,7 +40,6 @@ void CoreStart(Core* core)
             {
                 continue;
             }
-
             core->modules[i].update(core->modules[i].data, deltaTime);
         }
 
@@ -50,7 +49,7 @@ void CoreStart(Core* core)
 
 void CoreDestroy(Core* core)
 {
-    for(int i = 0; i < core->moduleCapacity; i++)
+    for(int i = core->moduleCapacity - 1; i >= 0; i--)
     {
         if(core->modules[i].destroy == NULL)
         {
@@ -60,7 +59,7 @@ void CoreDestroy(Core* core)
         core->modules[i].destroy(core->modules[i].data);
     }
 
-    for(int i = 0; i < core->ffdataCapacity; i++)
+    for(int i = core->ffdataCapacity - 1; i >= 0; i--)
     {
         if(core->ffdata[i].destroy == NULL)
         {

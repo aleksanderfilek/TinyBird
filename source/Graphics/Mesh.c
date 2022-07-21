@@ -41,7 +41,6 @@ Mesh* PlaneCreate()
     glBindVertexArray(0);
 
     Mesh* mesh = (Mesh*)malloc(sizeof(Mesh));
-
     mesh->VAO = VAO;
     mesh->VBO = VBO;
     mesh->EBO = EBO;

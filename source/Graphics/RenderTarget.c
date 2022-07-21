@@ -59,6 +59,17 @@ void RenderTargetBind(RenderTarget* renderTarget)
   int id = (renderTarget)? renderTarget->fbo : 0;
   glBindFramebuffer(GL_FRAMEBUFFER, id);
 
-  Int2 size = (renderTarget)? renderTarget->texture.size : ((Window*)CoreModuleGet(core, 2))->size;
+  Int2 size = {0, 0};
+  if(renderTarget)
+  {
+    size = renderTarget->texture.size;
+    // printf("rt %d %d\n", size.x, size.y);
+  }
+  else
+  {
+    size = ((Window*)CoreModuleGet(core, 2))->size;
+    // printf("w %d %d\n", size.x, size.y);
+  }
+
   glViewport(0, 0, size.x, size.y);
 }

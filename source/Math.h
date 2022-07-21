@@ -1,6 +1,8 @@
 #ifndef TB_MATH_H_
 #define TB_MATH_H_
 
+#include<stdint.h>
+
 typedef struct Int2
 {
     int x, y;

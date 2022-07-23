@@ -4,11 +4,11 @@
 #include"../Modules/Window.h"
 #include"../Graphics/Shader.h"
 #include"../Graphics/Texture.h"
-#include"../Graphics/Mesh.h"
 #include"../Graphics/Spritebatch.h"
-#include"../Graphics/RenderTarget.h"
 #include"../ThirdParty/GL/Gl.h"
-#include"../Graphics/Font.h"
+#include"../Game/Player.h"
+#include"../Game/Segments.h"
+#include"../Game/Pipe.h"
 
 #include<stdio.h>
 #include<stdbool.h>
@@ -19,46 +19,46 @@ void MenuStart(void* ptr)
 {
     Menu* menu = (Menu*)ptr;
 
-    menu->input = CoreModuleGet(core, 1);
-    menu->window = CoreModuleGet(core, 2);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
 
-    menu->shader = ShaderCreate("bin/resources/spritebatch.vert", "bin/resources/spritebatch.frag");
-    menu->texture = TextureCreate("bin/resources/papaj.png");
-    menu->mesh = PlaneCreate();
-    menu->simpleShader = ShaderCreate("bin/resources/simple.vert", "bin/resources/simple.frag");
-    menu->renderTarget = RenderTargetCreate(80,60);
+    menu->window = (Window*)CoreModuleGet(core, 2);
 
-    menu->spritebatch = SpritebatchCreate(menu->shader, 10, 32);
+    menu->player = PlayerCreate((Input*)CoreModuleGet(core, 1), 
+        (Int2){ menu->window->size.x/3, menu->window->size.y/2 });
 
-    menu->font = FontCreate("bin/resources/arial.ttf", 0, 48);
+    Shader* shader = ShaderCreate("bin/resources/spritebatch.vert", "bin/resources/spritebatch.frag");
+    CoreFFDataAdd(core, 0, shader, ShaderDestroy);
+    Mat4 pixelMat = pixelScreenMatrix(menu->window->size.x, menu->window->size.y);
+    ShaderBind(shader);
+    ShaderUniformMatrixSet(shader, "pixel", &pixelMat);
 
-    menu->pixelMat = pixelScreenMatrix(640,480);
-    menu->smallPixelMat = pixelScreenMatrix(80,60);
+    menu->spritebatch = SpritebatchCreate(shader, 10, 32);
+    CoreFFDataAdd(core, 1, shader, ShaderDestroy);
 
-    WindowColorSet(0.0, 0.0, 1.0, 1.0);
+    WindowColorSet(0.0f, 0.0f, 1.0f, 1.0f);
+
+    menu->floor = SegmentsCreate(menu->window->size.x, menu->window->size.y, "bin/resources/Floor.png");
+    menu->buildings = SegmentsCreate(menu->window->size.x, (int)menu->floor->position.y, "bin/resources/Buildings.png");
+    menu->pipeManager = PipeManagerCreate((Int2){0,0}, 3, menu->window->size.x, menu->buildings->position.y);
 }
 
 void MenuUpdate(void* ptr, double elapsedTime)
 {
     Menu* menu = (Menu*)ptr;
 
-    RenderTargetBind(menu->renderTarget);
+    PlayerUpdate(menu->player, elapsedTime);
+    SegmentsUpdate(menu->floor, elapsedTime);
+    SegmentsUpdate(menu->buildings, elapsedTime);
+    PipeManagerUpdate(menu->pipeManager, elapsedTime);
 
     WindowClear();
-    SpritebatchBegin(menu->spritebatch);
-    ShaderUniformMatrixSet(menu->shader, "pixel", &menu->smallPixelMat);
-    SpritebatchDraw(menu->spritebatch, menu->texture, (Int2){0, 0}, (Int2){100, 100}, (Float4){0.0f, 0.0f, 1.0f, 1.0f});
-    SpritebatchEnd(menu->spritebatch);
-
-    RenderTargetBind(NULL);
-    WindowClear();
-    ShaderBind(menu->simpleShader);
-    TextureBind(&menu->renderTarget->texture, 0);
-    MeshDraw(menu->mesh);
 
     SpritebatchBegin(menu->spritebatch);
-    ShaderUniformMatrixSet(menu->shader, "pixel", &menu->pixelMat);
-    SpritebatchRenderText(menu->spritebatch, menu->font, "Alekygi", (Int2){0, 0}, 1.0f);
+    SegmentsDraw(menu->buildings, menu->spritebatch);
+    PipeManagerDraw(menu->pipeManager, menu->spritebatch);
+    PlayerDraw(menu->player, menu->spritebatch);
+    SegmentsDraw(menu->floor, menu->spritebatch);
     SpritebatchEnd(menu->spritebatch);
 
     WindowRender(menu->window);
@@ -68,11 +68,8 @@ void MenuDestroy(void* ptr)
 {
     Menu* menu = (Menu*)ptr;
 
-    RenderTargetDestroy(menu->renderTarget);
-    ShaderDestroy(menu->simpleShader);
-    ShaderDestroy(menu->shader);
-    TextureDestroy(menu->texture);
-    MeshDestroy(menu->mesh);
-    SpritebatchDestroy(menu->spritebatch);
-    FontDestroy(menu->font);
+    PlayerDestroy(menu->player);
+    SegmentsDestroy(menu->floor);
+    SegmentsDestroy(menu->buildings);
+    PipeManagerDestroy(menu->pipeManager);
 }

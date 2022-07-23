@@ -2,6 +2,21 @@
 
 #include<string.h>
 
+int LerpI(int a, int b, float t)
+{
+    return a + (b-a)*t;
+}
+
+Float2 LerpF2(Float2 a, Float2 b, float t)
+{
+    return (Float2){ a.x + t*(b.x - a.x), a.y + t*(b.y - a.y) };
+}
+
+Int2 Float2ToInt2(Float2 a)
+{
+    return (Int2){ (int)a.x, (int)a.y };
+}
+
 Mat4 pixelScreenMatrix(int width, int height)
 {
     Mat4 matrix;

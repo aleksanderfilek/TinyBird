@@ -3,6 +3,8 @@
 
 #include<stdint.h>
 
+int LerpI(int a, int b, float t);
+
 typedef struct Int2
 {
     int x, y;
@@ -12,6 +14,9 @@ typedef struct Float2
 {
     float x, y;
 } Float2;
+
+Float2 LerpF2(Float2 a, Float2 b, float t);
+Int2 Float2ToInt2(Float2 a);
 
 typedef struct Float3
 {

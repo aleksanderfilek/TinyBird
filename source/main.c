@@ -16,7 +16,8 @@ EventFunction(CloseApp)
 int WinMain(int argc, char *argv[])
 {
     core = CoreCreate();
-    Window* window = WindowCreate("title", 640, 480, 0);
+    
+    Window* window = WindowCreate("title", 384, 480, 0);
     EventAdd(window->closeEvent, CloseApp);
     Input* input = InputCreate();
     StateManager* stateManager = StateManagerCreate();

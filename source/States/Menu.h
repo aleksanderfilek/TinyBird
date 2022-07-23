@@ -6,28 +6,23 @@
 #include<stdint.h>
 #include"../Math.h"
 
-STRUCT(Input);
 STRUCT(Window);
-STRUCT(Shader);
 STRUCT(Mesh);
 STRUCT(Texture);
 STRUCT(Spritebatch);
-STRUCT(RenderTarget);
-STRUCT(Font);
+STRUCT(Player);
+STRUCT(Segments);
+STRUCT(PipeManager);
 
 typedef struct Menu
 {
-    Input* input;
     Window* window;
-    Shader* shader;
-    Texture* texture;
-    Mesh* mesh;
     Spritebatch* spritebatch;
-    Shader* simpleShader;
-    RenderTarget* renderTarget;
-    Font* font;
-    Mat4 pixelMat;
-    Mat4 smallPixelMat;
+
+    Player* player;
+    Segments* floor;
+    Segments* buildings;
+    PipeManager* pipeManager;
 } Menu;
 
 void MenuStart(void* ptr);

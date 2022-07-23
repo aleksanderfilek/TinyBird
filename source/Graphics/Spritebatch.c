@@ -173,9 +173,6 @@ void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, Int2 position, 
 
 void SpritebatchRenderText(Spritebatch* spritebatch, Font* font, const char* text, Int2 position, float scale)
 {
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
-
   int length = strlen(text);
 
   Int2 characterPosition = position;
@@ -189,5 +186,4 @@ void SpritebatchRenderText(Spritebatch* spritebatch, Font* font, const char* tex
     SpritebatchDraw(spritebatch, &texture, (Int2){xPos, yPos}, size, (Float4){0.0f, 0.0f, 1.0f, 1.0f});
     characterPosition.x += (character->Advance >> 6 ) * scale;
   }
-  glDisable(GL_BLEND);
 }

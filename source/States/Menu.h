@@ -2,27 +2,24 @@
 #define TB_MENU_H_
 
 #include"../Defaults.h"
-#include"../Modules/State.h"
-#include<stdint.h>
-#include"../Math.h"
 
 STRUCT(Window);
-STRUCT(Mesh);
-STRUCT(Texture);
+STRUCT(Input);
 STRUCT(Spritebatch);
-STRUCT(Player);
 STRUCT(Segments);
-STRUCT(PipeManager);
+STRUCT(Button);
 
 typedef struct Menu
 {
+    // basic
     Window* window;
+    Input* input;
     Spritebatch* spritebatch;
 
-    Player* player;
+    Button* closeButton;
+
+    // background
     Segments* floor;
-    Segments* buildings;
-    PipeManager* pipeManager;
 } Menu;
 
 void MenuStart(void* ptr);

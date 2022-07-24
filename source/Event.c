@@ -1,6 +1,7 @@
 #include"Event.h"
 
 #include<stdlib.h>
+#include<stdio.h>
 
 Event* EventCreate()
 {

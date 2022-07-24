@@ -24,6 +24,7 @@ typedef struct Player
 
     bool alive;
     Float2 position;
+    Int2 globalPosition;
     float velocity;
 } Player;
 

@@ -7,15 +7,15 @@
 
 typedef struct BoxCollision2D
 {
-    Int2 position;
-    Int2 size;
+    Int2* position;
+    Int2* size;
 } BoxCollision2D;
 
 bool PointBoxIntersection(Int2 point, BoxCollision2D box);
 
 typedef struct CircleCollision2D
 {
-    Int2 position;
+    Int2* position;
     int radius;
 } CircleCollision2D;
 

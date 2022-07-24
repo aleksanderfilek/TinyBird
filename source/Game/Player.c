@@ -14,10 +14,11 @@ Player* PlayerCreate(Input* input, Int2 startPosition)
     player->alive = true;
     player->position = (Float2){ startPosition.x, startPosition.y };
     player->velocity = 0.0f;
+    player->globalPosition = Float2ToInt2(player->position);
 
     player->texture = TextureCreate("bin/resources/Bird.png");
 
-    player->collider.position = startPosition;
+    player->collider.position = &player->globalPosition;
     player->collider.radius = RADIUS;
 
     return player;
@@ -54,7 +55,7 @@ void PlayerUpdate(Player* player, double elapsedTime)
 
     player->position.y -= player->velocity;
     
-    player->collider.position = Float2ToInt2(player->position);
+    player->globalPosition = Float2ToInt2(player->position);
 }
 
 void PlayerDraw(Player* player, Spritebatch* spritebatch)

@@ -18,7 +18,7 @@ typedef struct Segments
 
 } Segments;
 
-Segments* SegmentsCreate(int screenWidth, int screenHeight, const char* texturePath);
+Segments* SegmentsCreate(int screenWidth, int screenHeight, Texture* texture);
 void SegmentsUpdate(Segments* segments, double elapsedTime);
 void SegmentsDraw(Segments* segments, Spritebatch* spritebatch);
 void SegmentsDestroy(Segments* segments);

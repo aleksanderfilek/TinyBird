@@ -15,6 +15,8 @@
         "spritebatch.h": "c",
         "stdlib.h": "c",
         "player.h": "c",
-        "segments.h": "c"
+        "segments.h": "c",
+        "defaults.h": "c",
+        "button.h": "c"
     }
 }

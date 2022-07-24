@@ -6,7 +6,6 @@
 
 Core* core = NULL;
 
-
 EventFunction(CloseApp)
 {
     Core* _core = (Core*)args;
@@ -17,7 +16,7 @@ int WinMain(int argc, char *argv[])
 {
     core = CoreCreate();
     
-    Window* window = WindowCreate("title", 384, 480, 0);
+    Window* window = WindowCreate("TinyBird", 384, 480, 0);
     EventAdd(window->closeEvent, CloseApp);
     Input* input = InputCreate();
     StateManager* stateManager = StateManagerCreate();

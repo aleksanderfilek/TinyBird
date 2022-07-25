@@ -16,6 +16,7 @@ STRUCT(PipeManager);
 typedef struct Game
 {
     Window* window;
+    Spritebatch* spritebatch;
 
     Player* player;
     Segments* floor;

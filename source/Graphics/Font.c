@@ -103,7 +103,7 @@ void FontDestroy(void* ptr)
 
 Int2 FontTextSize(Font* font, const char* text, float scale)
 {
-    Int2 size = { 0, font->height };
+    Int2 size = { 0, font->height * scale};
 
     int length = strlen(text);
     for(int i = 0; i < length; i++)

@@ -87,8 +87,15 @@ void MenuStart(void* ptr)
 
     if(!CoreFFDataExists(core, 7)) // font
     {
-        Font* font = FontCreate("bin/resources/arial.ttf", 0, 48);
-        CoreFFDataAdd(core, 7, font, FontDestroy);
+        menu->font = FontCreate("bin/resources/arial.ttf", 0, 48);
+        CoreFFDataAdd(core, 7, menu->font, FontDestroy);
+    }
+
+    if(!CoreFFDataExists(core, 8)) // score
+    {
+        int* score = MALLOC(int);
+        *score = 0;
+        CoreFFDataAdd(core, 8, score, free);
     }
 
     menu->floor = SegmentsCreate(menu->window->size.x, menu->window->size.y, CoreFFDataGet(core, 5));
@@ -108,6 +115,10 @@ void MenuStart(void* ptr)
     menu->closeButton = ButtonCreate(quitPosition, quitTextSize);
     ButtonTextSet(menu->closeButton, "Quit", font, 1.0f);
     ButtonClickSet(menu->closeButton, CloseBtn);
+
+    Int2 signatureTextSize = FontTextSize(font, "Created by Aleksander Filek", 0.5f);
+    menu->signaturePosition = (Int2){ menu->window->size.x - signatureTextSize.x - 5,   
+        menu->window->size.y - signatureTextSize.y - 5};
 }
 
 void MenuUpdate(void* ptr, double elapsedTime)
@@ -129,6 +140,7 @@ void MenuUpdate(void* ptr, double elapsedTime)
     SegmentsDraw(menu->floor, menu->spritebatch);
     ButtonDraw(menu->playButton, menu->spritebatch);
     ButtonDraw(menu->closeButton, menu->spritebatch);
+    SpritebatchRenderText(menu->spritebatch, menu->font, "Created by Aleksander Filek", menu->signaturePosition, 0.5f);
     SpritebatchEnd(menu->spritebatch);
 
     WindowRender(menu->window);

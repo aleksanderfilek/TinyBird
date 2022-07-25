@@ -21,58 +21,35 @@ void GameStart(void* ptr)
 
     game->window = (Window*)CoreModuleGet(core, 2);
 
-    // menu->player = PlayerCreate((Input*)CoreModuleGet(core, 1), 
-    //     (Int2){ menu->window->size.x/3, menu->window->size.y/2 });
+    game->player = PlayerCreate((Input*)CoreModuleGet(core, 1), 
+        (Int2){ game->window->size.x/3, game->window->size.y/2 });
 
-    // Shader* shader = NULL;
-    // if(!CoreFFDataExists(core, 1))
-    // {
-    //     Shader* shader = ShaderCreate("bin/resources/spritebatch.vert", "bin/resources/spritebatch.frag");
-    //     CoreFFDataAdd(core, 1, shader, ShaderDestroy);
-    //     Mat4 pixelMat = pixelScreenMatrix(menu->window->size.x, menu->window->size.y);
-    //     ShaderBind(shader);
-    //     ShaderUniformMatrixSet(shader, "pixel", &pixelMat);
-    // }
-    // else
-    // {
-    //     shader = (Shader*)CoreFFDataGet(core, 0);
-    // }
+    game->spritebatch = CoreFFDataGet(core, 2);
 
-    // if(!CoreFFDataExists(core, 2))
-    // {
-    //     menu->spritebatch = SpritebatchCreate(shader, 10, 32);
-    //     CoreFFDataAdd(core, 2, shader, ShaderDestroy);
-    // }
-    // else
-    // {
-    //     menu->spritebatch = CoreFFDataGet(core, 2);
-    // }
+    WindowColorSet(0.0f, 0.0f, 1.0f, 1.0f);
 
-    // WindowColorSet(0.0f, 0.0f, 1.0f, 1.0f);
-
-    // menu->floor = SegmentsCreate(menu->window->size.x, menu->window->size.y, "bin/resources/Floor.png");
-    // menu->buildings = SegmentsCreate(menu->window->size.x, (int)menu->floor->position.y, "bin/resources/Buildings.png");
-    // menu->pipeManager = PipeManagerCreate((Int2){0,0}, 3, menu->window->size.x, menu->buildings->position.y);
-
+    game->floor = SegmentsCreate(game->window->size.x, game->window->size.y, CoreFFDataGet(core, 5));
+    game->buildings = SegmentsCreate(game->window->size.x, (int)game->floor->position.y, CoreFFDataGet(core, 6));
+    game->pipeManager = PipeManagerCreate((Int2){0,0}, 3, game->window->size.x, game->buildings->position.y);
 }
 
 void GameUpdate(void* ptr, double elapsedTime)
 {
     Game* game = (Game*)ptr;
 
-    // PlayerUpdate(menu->player, elapsedTime);
-    // SegmentsUpdate(menu->floor, elapsedTime);
-    // SegmentsUpdate(menu->buildings, elapsedTime);
-    // PipeManagerUpdate(menu->pipeManager, elapsedTime);
+    PlayerUpdate(game->player, elapsedTime);
+    SegmentsUpdate(game->floor, elapsedTime);
+    SegmentsUpdate(game->buildings, elapsedTime);
+    PipeManagerUpdate(game->pipeManager, elapsedTime);
 
     WindowClear();
 
-    // SpritebatchBegin(menu->spritebatch);
-    // SegmentsDraw(menu->buildings, menu->spritebatch);
-    // PipeManagerDraw(menu->pipeManager, menu->spritebatch);
-    // PlayerDraw(menu->player, menu->spritebatch);
-    // SegmentsDraw(menu->floor, menu->spritebatch);
-    // SpritebatchEnd(menu->spritebatch);
+    SpritebatchBegin(game->spritebatch);
+    SegmentsDraw(game->buildings, game->spritebatch);
+    PipeManagerDraw(game->pipeManager, game->spritebatch);
+    PlayerDraw(game->player, game->spritebatch);
+    SegmentsDraw(game->floor, game->spritebatch);
+    SpritebatchEnd(game->spritebatch);
 
     WindowRender(game->window);
 }
@@ -81,8 +58,8 @@ void GameDestroy(void* ptr)
 {
     Game* game = (Game*)ptr;
 
-    // PlayerDestroy(game->player);
-    // SegmentsDestroy(game->floor);
-    // SegmentsDestroy(game->buildings);
-    // PipeManagerDestroy(game->pipeManager);
+    PlayerDestroy(game->player);
+    SegmentsDestroy(game->floor);
+    SegmentsDestroy(game->buildings);
+    PipeManagerDestroy(game->pipeManager);
 }

@@ -15,6 +15,8 @@ STRUCT(PipeManager);
 
 typedef struct Game
 {
+    Window* window;
+
     Player* player;
     Segments* floor;
     Segments* buildings;

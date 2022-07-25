@@ -3,6 +3,7 @@
 #include"../ThirdParty/FreeType/FreeType.h"
 
 #include<stdlib.h>
+#include<string.h>
 
 #ifdef DEBUG
 #include<stdio.h>
@@ -98,4 +99,23 @@ void FontDestroy(void* ptr)
     #ifdef DEBUG
     printf("[Font] Destroyed\n");
     #endif
+}
+
+Int2 FontTextSize(Font* font, const char* text, float scale)
+{
+    Int2 size = { 0, font->height };
+
+    int length = strlen(text);
+    for(int i = 0; i < length; i++)
+    {
+        Character* character = &font->characters[(int)text[i]];
+        size.x += (character->Advance >> 6 ) * scale;
+        int ySize = character->Size.y * scale;
+        if(ySize > size.y)
+        {
+            size.y = ySize;
+        }
+    }
+
+    return size;
 }

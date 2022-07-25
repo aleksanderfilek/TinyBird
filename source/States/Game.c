@@ -19,7 +19,7 @@ void GameStart(void* ptr)
 {
     Game* game = (Game*)ptr;
 
-    // menu->window = (Window*)CoreModuleGet(core, 2);
+    game->window = (Window*)CoreModuleGet(core, 2);
 
     // menu->player = PlayerCreate((Input*)CoreModuleGet(core, 1), 
     //     (Int2){ menu->window->size.x/3, menu->window->size.y/2 });
@@ -65,7 +65,7 @@ void GameUpdate(void* ptr, double elapsedTime)
     // SegmentsUpdate(menu->buildings, elapsedTime);
     // PipeManagerUpdate(menu->pipeManager, elapsedTime);
 
-    // WindowClear();
+    WindowClear();
 
     // SpritebatchBegin(menu->spritebatch);
     // SegmentsDraw(menu->buildings, menu->spritebatch);
@@ -74,7 +74,7 @@ void GameUpdate(void* ptr, double elapsedTime)
     // SegmentsDraw(menu->floor, menu->spritebatch);
     // SpritebatchEnd(menu->spritebatch);
 
-    // WindowRender(menu->window);
+    WindowRender(game->window);
 }
 
 void GameDestroy(void* ptr)

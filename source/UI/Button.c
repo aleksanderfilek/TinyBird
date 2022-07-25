@@ -36,7 +36,7 @@ void ButtonDraw(Button* button, Spritebatch* spritebatch)
 {
     if(button->text)
     {
-        SpritebatchRenderText(spritebatch, button->font, button->text, button->position, 1.0f);
+        SpritebatchRenderText(spritebatch, button->font, button->text, button->position, button->scale);
     }
 }
 
@@ -45,10 +45,11 @@ void ButtonClickSet(Button* button, EventFunction function)
     EventAdd(button->clickEvent, function);
 }
 
-void ButtonTextSet(Button* button, const char* text, Font* font)
+void ButtonTextSet(Button* button, const char* text, Font* font, float scale)
 {
     button->font = font;
     button->text = text;
+    button->scale = scale;
 }
 
 void ButtonBackgroundSet(Button* button, Texture* texture)

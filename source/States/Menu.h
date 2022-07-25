@@ -16,6 +16,7 @@ typedef struct Menu
     Input* input;
     Spritebatch* spritebatch;
 
+    Button* playButton;
     Button* closeButton;
 
     // background

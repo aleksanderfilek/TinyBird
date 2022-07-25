@@ -19,5 +19,6 @@ typedef struct Font
 
 Font* FontCreate(const char* path, int width, int height);
 void FontDestroy(void* ptr);
+Int2 FontTextSize(Font* font, const char* text, float scale);
 
 #endif

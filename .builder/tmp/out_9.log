@@ -1,0 +1,184 @@
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:43:14: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+   spritebatch->indices = (uint32_t*)malloc(spritebatch->maxIndexCount * sizeof(uint32_t));
+              ^~
+source/Graphics/Spritebatch.c:47:16: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+     spritebatch->indices[i + 0] = 0 + offset;
+                ^~
+source/Graphics/Spritebatch.c:48:16: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+     spritebatch->indices[i + 1] = 1 + offset;
+                ^~
+source/Graphics/Spritebatch.c:49:16: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+     spritebatch->indices[i + 2] = 2 + offset;
+                ^~
+source/Graphics/Spritebatch.c:51:16: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+     spritebatch->indices[i + 3] = 2 + offset;
+                ^~
+source/Graphics/Spritebatch.c:52:16: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+     spritebatch->indices[i + 4] = 3 + offset;
+                ^~
+source/Graphics/Spritebatch.c:53:16: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+     spritebatch->indices[i + 5] = 0 + offset;
+                ^~
+source/Graphics/Spritebatch.c:60:59: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(spritebatch->indices), spritebatch->indices, GL_DYNAMIC_DRAW);
+                                                           ^~
+source/Graphics/Spritebatch.c:60:82: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(spritebatch->indices), spritebatch->indices, GL_DYNAMIC_DRAW);
+                                                                                  ^~
+source/Graphics/Spritebatch.c: In function 'SpritebatchDestroy':
+source/Graphics/Spritebatch.c:90:19: error: 'Spritebatch {aka struct Spritebatch}' has no member named 'indices'
+   free(spritebatch->indices);
+                   ^~
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c: In function 'SpritebatchCreate':
+source/Graphics/Spritebatch.c:47:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 0] = 0 + offset;
+                    ^
+source/Graphics/Spritebatch.c:48:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 1] = 1 + offset;
+                    ^
+source/Graphics/Spritebatch.c:49:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 2] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:51:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 3] = 2 + offset;
+                    ^
+source/Graphics/Spritebatch.c:52:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 4] = 3 + offset;
+                    ^
+source/Graphics/Spritebatch.c:53:20: warning: assignment makes pointer from integer without a cast [-Wint-conversion]
+     indices[i + 5] = 0 + offset;
+                    ^

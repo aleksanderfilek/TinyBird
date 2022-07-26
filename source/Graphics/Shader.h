@@ -15,5 +15,6 @@ void ShaderDestroy(void* ptr);
 void ShaderBind(Shader* shader);
 
 void ShaderUniformMatrixSet(Shader* shader, const char* name, const Mat4* value);
+void ShaderUniformVec3Set(Shader* shader, const char* name, Float3 value);
 
 #endif

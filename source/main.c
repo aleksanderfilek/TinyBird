@@ -3,6 +3,7 @@
 #include"Modules/Input.h"
 #include"Modules/State.h"
 #include"States/Menu.h"
+#include"Defines.h"
 
 Core* core = NULL;
 
@@ -23,9 +24,9 @@ int WinMain(int argc, char *argv[])
     StateManagerSetNext(stateManager, MenuState);
 
     CoreModuleSetup(core, 3, 1);
-    CoreModuleAdd(core, 1, input, InputUpdate, InputDestroy);
-    CoreModuleAdd(core, 2, window, WindowUpdate, WindowDestroy);
-    CoreModuleAdd(core, 3, stateManager, StateManagerUpdate, StateManagerDestroy);
+    CoreModuleAdd(core, INPUT_ID, input, InputUpdate, InputDestroy);
+    CoreModuleAdd(core, WINDOW_ID, window, WindowUpdate, WindowDestroy);
+    CoreModuleAdd(core, STATE_ID, stateManager, StateManagerUpdate, StateManagerDestroy);
 
     CoreStart(core);
     CoreDestroy(core);

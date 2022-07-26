@@ -22,7 +22,7 @@ PipeManager* PipeManagerCreate(Int2 gapBounds, int count, int screenWidth, int s
     int xDistance = (screenWidth + 32) / count;
     for(int i = 0; i < manager->pipesCount; i++)
     {
-        manager->pipes[i].position.x = i * xDistance + (count-1)*xDistance;
+        manager->pipes[i].position.x = i * xDistance + count*xDistance;
         int j = rand()%manager->gapCount;
         manager->pipes[i].position.y = 128 + (32 * j);
     }

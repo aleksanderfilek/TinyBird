@@ -100,3 +100,8 @@ void ShaderUniformMatrixSet(Shader* shader, const char* name, const Mat4* value)
 {
     glUniformMatrix4fv(glGetUniformLocation(shader->glId, name), 1, GL_FALSE, &value->column[0].x); 
 }
+
+void ShaderUniformVec3Set(Shader* shader, const char* name, Float3 value)
+{
+    glUniform3f(glGetUniformLocation(shader->glId, name), value.x, value.y, value.z);
+}

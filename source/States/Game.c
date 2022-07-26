@@ -29,7 +29,9 @@ void GameStart(void* ptr)
     WindowColorSet(0.0f, 0.0f, 1.0f, 1.0f);
 
     game->floor = SegmentsCreate(game->window->size.x, game->window->size.y, CoreFFDataGet(core, 5));
+    game->floor->position.x = *(float*)CoreFFDataGet(core, 9);
     game->buildings = SegmentsCreate(game->window->size.x, (int)game->floor->position.y, CoreFFDataGet(core, 6));
+    game->buildings->position.x = *(float*)CoreFFDataGet(core, 10);
     game->pipeManager = PipeManagerCreate((Int2){0,0}, 3, game->window->size.x, game->buildings->position.y);
 }
 

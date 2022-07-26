@@ -17,13 +17,18 @@ typedef struct Menu
     Window* window;
     Input* input;
     Spritebatch* spritebatch;
+    Spritebatch* textSpritebatch;
     Font* font;
 
     Button* playButton;
     Button* closeButton;
 
+    char bestScore[16];
+    Int2 bestScorePosition;
+
     // background
     Segments* floor;
+    Segments* buildings;
     Int2 signaturePosition;
 } Menu;
 

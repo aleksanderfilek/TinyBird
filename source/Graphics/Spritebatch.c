@@ -40,7 +40,7 @@ Spritebatch* SpritebatchCreate(Shader* shader, uint32_t capacity, uint32_t maxTe
 
   spritebatch->indexCount = 0;
   spritebatch->maxIndexCount = 6 * capacity;
-  uint32_t indices[spritebatch->maxIndexCount];
+  uint32_t* indices[spritebatch->maxIndexCount];
   uint32_t offset = 0;
   for(int i = 0; i < spritebatch->maxIndexCount; i+=6)
   {
@@ -96,14 +96,13 @@ void SpritebatchDestroy(void* ptr)
 
 void SpritebatchBegin(Spritebatch* spritebatch)
 {
+  ShaderBind(spritebatch->shader);
   glUniform1iv(spritebatch->shaderTexturesLocation, spritebatch->maxTextureSlots, spritebatch->sampler);
 
   spritebatch->quadBufferPtr = spritebatch->quadBuffer;
 
   spritebatch->indexCount = 0;
   spritebatch->textureSlotIndex = 0;
-
-  ShaderBind(spritebatch->shader);
 }
 
 void SpritebatchEnd(Spritebatch* spritebatch)
@@ -125,7 +124,10 @@ void SpritebatchDraw(Spritebatch* spritebatch, Texture* texture, Int2 position, 
 {
   if(spritebatch->indexCount >= spritebatch->maxIndexCount || spritebatch->textureSlotIndex > spritebatch->maxTextureSlots)
   {
-    SpritebatchEnd(spritebatch);
+    spritebatch->quadBufferPtr = spritebatch->quadBuffer;
+    spritebatch->indexCount = 0;
+    spritebatch->textureSlotIndex = 0;
+
     SpritebatchBegin(spritebatch);
   }
 
